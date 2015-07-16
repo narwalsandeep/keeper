@@ -1,0 +1,34 @@
+{
+	"name" : "keeper",
+	"description" : "keeper",
+	"require" : {
+		"php" : ">=5.5.0",
+		"zendframework/zendframework" : "*",
+		"zendframework/zend-developer-tools" : "dev-master",
+		"zfcampus/zf-apigility" : "dev-master",
+		"zfcampus/zf-apigility-admin" : "dev-master",
+		"zfcampus/zf-apigility-documentation" : "dev-master",
+		"imagine/imagine" : "dev-master",
+		"phpunit/phpunit-selenium" : "dev-master",
+		"zendframework/zendservice-amazon" : "dev-master",
+		"piece/stagehand-alterationmonitor" : "dev-master",
+		"piece/stagehand-componentfactory" : "dev-master",
+		"piece/stagehand-testrunner" : "dev-master"
+	},
+	"require-dev" : {
+		"zendframework/zftool" : "dev-master",
+		"zfcampus/zf-development-mode" : "dev-master",
+		"zfcampus/zf-apigility-welcome" : "dev-master",
+		"zfcampus/zf-deploy" : "dev-master",
+		"phpunit/phpunit" : "dev-master",
+		"phpunit/php-invoker" : "*",
+		"phpunit/dbunit" : "dev-master",
+		"phpunit/phpunit-selenium" : "dev-master",
+		"phpunit/phpunit-skeleton-generator" : "*"
+	},
+	"keywords" : [
+		"keeper"
+	],
+	"license" : "BSD-3-Clause",
+	"homepage" : "http://framework.zend.com/"
+}
