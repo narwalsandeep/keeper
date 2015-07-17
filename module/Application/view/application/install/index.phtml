@@ -1,1 +1,75 @@
-<?php echo __FILE__;?>
+<div class="col-lg-6">
+	<form class="form-horizontal" ajax-form-submit
+		action="<?php echo $this->url("application/child",array("controller"=>"install","action"=>"start"))?>"
+		method="post">
+		<div class="wizard" data-initialize="wizard">
+			<ul class="steps">
+				<li data-name="about" class="active">INSTALL<span class="chevron"></span></li>
+			</ul>
+			<div class="step-content">
+				<div class=" alert">
+					<div class="form-group">
+						<label for="username" class="col-lg-2 control-label">DB Host</label>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="host"
+								placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="username" class="col-lg-2 control-label">DB Name</label>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="dbname"
+								placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="passwd" class="col-lg-2 control-label">DB Username</label>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="username"
+								placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="passwd" class="col-lg-2 control-label">DB Password</label>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="password"
+								placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label"></label>
+						<div class="col-lg-8">
+							<input type="submit" value="Submit" class="btn btn-primary">
+						</div>
+					</div>
+					<hr>
+
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="col-lg-6">
+	<div class="wizard" data-initialize="wizard">
+		<ul class="steps">
+			<li data-name="about" class="active">STATUS<span class="chevron"></span></li>
+		</ul>
+		<div class="step-content">
+			<div class="start-status text text-primary">Not Started. Fill in valid database information and click "Submit"</div>
+			<div class=" install-status"></div>
+		</div>
+	</div>
+</div>
+<script>
+$(function() {
+
+	// via ajax submit plugin
+	$('form[ajax-form-submit]').autosubmit(function(form,response){
+		$(".start-status").html("Installing system ...<hr>");
+		$(".install-status").html(response);
+	},function(form){
+	});
+
+});
+
+</script>

@@ -1,122 +1,204 @@
-create table keeper_user(
+<?php
+$prefix = "keyper_";
 
-	id int(10) auto_increment,
-	username varchar(100),
-	password varchar(100),
-	first_name varchar(100),
-	last_name varchar(100),
-	mobile varchar(100),
-	status varchar(200),
-	dated varchar(100),
-	
-	primary key (id)
-	
-)engine=innodb;
-
-create table keeper_locker(
-
-	id int(10) auto_increment,
-	name varchar(200),
-	description text,
-	status varchar(200),
-	dated varchar(100),
-	
-	primary key (id)
-	
-)engine=innodb;
-
-create table keeper_box(
-
-	id int(10) auto_increment,
-	name varchar(200), -- ftp ssh etc or anything to define type
-	status varchar(200),
-	dated varchar(100),
-	
-	primary key (id)
-
-)engine=innodb;
-
-create table keeper_data(
-	
-	id int(10) auto_increment,
-	name varchar(200),
-	value text,
-	notes text,
-	status varchar(200),
-	dated varchar(100),
-	
-	primary key(id)
-	
-)engine=innodb;
-
-create table keeper_file(
-
-	id int(10) auto_increment,
-	real_name text,
-	server_name varchar(200),
-	mime_type varchar(200),
-	web_path text,
-	physical_path text,
-	
-	status varchar(200),
-	dated varchar(100),
-	
-	primary key (id)
-
-)engine=innodb;
-
-create table keeper_user_locker(
-
-	id int(10) auto_increment,
-	user_id int(10),
- 	locker_id int(10),
-	
- 	primary key(id),
-	foreign key(locker_id) references keeper_locker(id) on delete cascade on update cascade,
-	foreign key(user_id) references keeper_user(id) on delete cascade on update cascade
-	
-)engine=innodb;
-
-create table keeper_locker_box(
-
-	id int(10) auto_increment,
-	locker_id int(10),
-	box_id int(10),
- 	
- 	primary key(id),
-	foreign key(locker_id) references keeper_locker(id) on delete cascade on update cascade,
-	foreign key(box_id) references keeper_box(id) on delete cascade on update cascade
-	
-)engine=innodb;
-
-create table keeper_box_data(
-
-	id int(10) auto_increment,
-	box_id int(10),
-	data_id int(10),
- 	
- 	primary key(id),
-	foreign key(box_id) references keeper_box(id) on delete cascade on update cascade,
-	foreign key(data_id) references keeper_data(id) on delete cascade on update cascade
-	
-)engine=innodb;
-
-create table keeper_box_file(
-
-	id int(10) auto_increment,
-	box_id int(10),
-	file_id int(10),
- 	
- 	primary key(id),
-	foreign key(box_id) references keeper_box(id) on delete cascade on update cascade,
-	foreign key(file_id) references keeper_file(id) on delete cascade on update cascade
-	
-)engine=innodb;
-
-
-
-
-
-
-
+$schema = array (
+	"user" => array (
+		"entity" => "Model\Entity\User",
+		"columns" => array (
+			array (
+				"first_name" 
+			),
+			array (
+				"last_name" 
+			),
+			array (
+				"username" 
+			),
+			array (
+				"password" 
+			),
+			array (
+				"mobile" 
+			),
+			array (
+				"telephone" 
+			),
+			array (
+				"dated" 
+			),
+			array (
+				"status" 
+			) 
+		) 
+	),
+	"locker" => array (
+		"entity" => "Model\Entity\Locker",
+		"columns" => array (
+			array (
+				"name" 
+			),
+			array (
+				"description" 
+			),
+			array (
+				"dated" 
+			),
+			array (
+				"status" 
+			) 
+		) 
+	),
+	"box" => array (
+		"entity" => "Model\Entity\Box",
+		"columns" => array (
+			array (
+				"name" 
+			),
+			array (
+				"status" 
+			),
+			array (
+				"dated" 
+			) 
+		) 
+	),
+	"data" => array (
+		"entity" => "Model\Entity\Data",
+		"columns" => array (
+			array (
+				"name" 
+			),
+			array (
+				"value" 
+			),
+			array (
+				"notes" 
+			),
+			array (
+				"status" 
+			),
+			array (
+				"dated" 
+			) 
+		) 
+	),
+	"file" => array (
+		"entity" => "Model\Entity\File",
+		"columns" => array (
+			array (
+				"client_name" 
+			),
+			array (
+				"server_name" 
+			),
+			array (
+				"mime_type" 
+			),
+			array (
+				"web_path" 
+			),
+			array (
+				"physical_path" 
+			),
+			array (
+				"status" 
+			),
+			array (
+				"dated" 
+			) 
+		) 
+	),
+	"user_locker" => array (
+		"entity" => "Model\Entity\UserLocker",
+		"associate" => array (
+			"user" => "user_id",
+			"locker" => "locker_id" 
+		),
+		"columns" => array (
+			array (
+				"user_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			),
+			array (
+				"locker_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			) 
+		) 
+	),
+	"locker_box" => array (
+		"entity" => "Model\Entity\LockerBox",
+		"associate" => array (
+			"locker" => "locker_id",
+			"box" => "box_id" 
+		),
+		"columns" => array (
+			array (
+				"locker_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			),
+			array (
+				"box_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			) 
+		) 
+	),
+	"box_data" => array (
+		"entity" => "Model\Entity\BoxData",
+		"associate" => array (
+			"box" => "box_id",
+			"data" => "data_id" 
+		),
+		"columns" => array (
+			array (
+				"box_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			),
+			array (
+				"data_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			) 
+		) 
+	),
+	"box_file" => array (
+		"entity" => "Model\Entity\BoxFile",
+		"associate" => array (
+			"box" => "box_id",
+			"file" => "file_id" 
+		),
+		"columns" => array (
+			array (
+				"box_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			),
+			array (
+				"file_id",
+				"data_type" => array (
+					"int",
+					"11" 
+				) 
+			) 
+		) 
+	) 
+);
 

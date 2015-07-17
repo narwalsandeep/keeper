@@ -25,133 +25,6 @@ use Model\Entity\User;
 class Module implements AutoloaderProviderInterface {
 	
 	/**
-	 *
-	 * @var unknown
-	 */
-	public static $table_prefix = "bv2_";
-	
-	/**
-	 *
-	 * @var unknown
-	 */
-	public static $table_map = array (
-		"user" => array (
-			"entity" => "\Model\Entity\User",
-			"associate" => array (
-				"business_agent" => "agent_id",
-				"calendar" => "agent_id",
-				"service" => "agent_id",
-				"booking" => array (
-					"customer_id",
-					"agent_id" 
-				) 
-			),
-			"columns" => array (
-				"id",
-				"first_name",
-				"last_name",
-				"username",
-				"passwd",
-				"mobile",
-				"telephone",
-				"dated",
-				"status" 
-			) 
-		),
-		"business" => array (
-			"entity" => "\Model\Entity\Business",
-			"associate" => array (
-				"business_agent" => "business_id" 
-			),
-			"columns" => array (
-				"id",
-				"name",
-				"description",
-				"address",
-				"geo_latitude",
-				"geo_longitude",
-				"mobile",
-				"telephone",
-				"fax",
-				"website",
-				"dated",
-				"status" 
-			) 
-		),
-		"business_agent" => array (
-			"entity" => "\Model\Entity\BusinessAgent",
-			"associate" => array (),
-			"columns" => array (
-				"id",
-				"business_id",
-				"agent_id",
-				"dated" 
-			) 
-		),
-		"calendar" => array (
-			"entity" => "\Model\Entity\Calendar",
-			"associate" => array (),
-			"columns" => array (
-				"id",
-				"agent_id",
-				"name",
-				"dated" 
-			) 
-		),
-		"service" => array (
-			"entity" => "\Model\Entity\Service",
-			"associate" => array (
-				"service_availability" => "service_id" 
-			),
-			"columns" => array (
-				"id",
-				"agent_id",
-				"parent_id",
-				"name",
-				"price",
-				"currency",
-				"price_unit",
-				"dated" 
-			) 
-		),
-		"service_availability" => array (
-			"entity" => "\Model\Entity\ServiceAvailability",
-			"associate" => array (),
-			"columns" => array (
-				"id",
-				"service_id",
-				"from_timestamp",
-				"to_timestamp",
-				"dated" 
-			) 
-		),
-		"booking" => array (
-			"entity" => "\Model\Entity\Booking",
-			"associate" => array (
-				"booking_detail" => "booking_id" 
-			),
-			"columns" => array (
-				"id",
-				"agent_id",
-				"customer_id",
-				"dated" 
-			) 
-		),
-		"booking_detail" => array (
-			"entity" => "\Model\Entity\BookingDetail",
-			"associate" => array (),
-			"columns" => array (
-				"id",
-				"booking_id",
-				"from_timetamp",
-				"to_timestamp",
-				"status",
-				"dated" 
-			) 
-		) 
-	);
-	
-	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Zend\ModuleManager\Feature\AutoloaderProviderInterface::getAutoloaderConfig()
@@ -173,7 +46,7 @@ class Module implements AutoloaderProviderInterface {
 	public function getServiceConfig() {
 		
 		// map each table in service factories
-		foreach ( self::$table_map as $key => $value ) {
+		/*foreach ( self::$table_map as $key => $value ) {
 			$entity = $value ["entity"] . 'Table';
 			$name = self::$table_prefix . $key;
 			$gateway = $value ['entity'] . 'Gateway';
@@ -192,9 +65,10 @@ class Module implements AutoloaderProviderInterface {
 				return new TableGateway ( $name, $dbAdapter, null, $initResultSet );
 			};
 		}
+		*/
 		// return all factories
 		return array (
-			'factories' => $factory 
+//			'factories' => $factory 
 		);
 	}
 	
